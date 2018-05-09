@@ -1,18 +1,26 @@
 package pl.sda;
 
+import java.util.Random;
+
 public class Boxer implements IFighter {
 
     private String name;
     private int hp;
+    private int strength;
 
-    public Boxer(String name, int hp) {
+    public Boxer(String name, int hp, int strength) {
         this.name = name;
         this.hp = hp;
+        this.strength = strength;
     }
 
     @Override
     public String getName() {
         return name;
+    }
+
+    public int getStrength() {
+        return strength;
     }
 
     public void setName(String name) {
@@ -30,7 +38,10 @@ public class Boxer implements IFighter {
 
     @Override
     public AttackType getAttackAction() {
-        return AttackType.HOOK;
+
+        Random random = new Random();
+
+        return AttackType.randomize(random.nextInt(3));
     }
 
     @Override
@@ -39,8 +50,8 @@ public class Boxer implements IFighter {
     }
 
     @Override
-    public void decreaseHp() {
-        hp--;
+    public void decreaseHp(double v) {
+        hp = hp - (int) v;
     }
 
     @Override
